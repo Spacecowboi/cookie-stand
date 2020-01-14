@@ -27,11 +27,35 @@ var seattleStore = {
       // add the totalCookies to the salesPerHourArray
       this.salesPerHour.push(totalCookiesPerHour);
     }
-    for (i = 0; i < hours.length; i++){
-      salesPerHour.push(customersPerHour[i] * this.customerAverage);
-    }
-    console.log(customersPerHour);
-    console.log(salesPerHour);
+    console.log(this.salesPerHour);
+
   },
+  render: function(){
+    this.getHourlySales();
+    //output HTML to the DOC
+    //Unordered list with the name of the city
+    var storesArticle = document.getElementById('stores');
+    var cityUL = document.createElement('ul');
+    var cityHeader = document.createElement('h1');
+    cityHeader.textContent = this.name;
+    cityUL.appendChild(cityHeader);
+    // I need to create a LI for every hour the store is open
+    for (var i = 0; i < hours.length; i++){
+      var hourLI = document.createElement('li');
+      hourLI.textContent = '${hours[i]}: ${this.salesperHour[i]} cookies';
+      cityUL.appendChild(hourLI);
+    }
+    //create the total
+    var total = 0;
+    for(var i = 0; i < this.salesPerHour.length; i++){
+      total += this.salesPerHour[i];
+    }
+    var totalLI = document.createElement('li');
+    totalLI.textContent = 'Total ${total} cookies';
+    cityUL.appendChild(totalLI);
+    storesArticle.appendChild(cityUL);
+    // 2 pieces of data: hourOfDay: ##cookies
+  },
+
 };
-seattleStore.hourlySales();
+seattleStore.render();
