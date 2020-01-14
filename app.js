@@ -1,7 +1,7 @@
 'use strict';
 //Open hours
 
-//Collaborated with Alex pena
+//Collaborated with Alex pena, amazing help to get started
 var hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
 //RNGESUS//
 function getRandomInt(customerMin, customerMax) {
@@ -21,9 +21,9 @@ var seattleStore = {
   getHourlySales: function(){
     // Go through the hours of the day
     for (var i = 0; i < hours.length; i++){
-      // create a new variable called totalCookiesPerHour = customersPerHour * this.customerAverage
-      var totalCookiesPerHour = customersPerHour * this.customerAverage;
-      customersPerHour.push(getRandomInt(this.customerMin,this.customerMax));
+      // create a new variable called customersPerHour and call the random function
+      var customersPerHour = getRandomInt(this.customerMin, this.customerMax);
+      var totalCookiesPerHour = Math.floor(customersPerHour * this.customerAverage);
       // add the totalCookies to the salesPerHourArray
       this.salesPerHour.push(totalCookiesPerHour);
     }
@@ -42,8 +42,8 @@ var seattleStore = {
     // I need to create a LI for every hour the store is open
     for (var i = 0; i < hours.length; i++){
       var hourLI = document.createElement('li');
-      hourLI.textContent = '${hours[i]}: ${this.salesperHour[i]} cookies';
-      cityUL.appendChild(hourLI);
+      hourLI.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
+      cityUL.appendChild(hourLI)
     }
     //create the total
     var total = 0;
@@ -51,7 +51,7 @@ var seattleStore = {
       total += this.salesPerHour[i];
     }
     var totalLI = document.createElement('li');
-    totalLI.textContent = 'Total ${total} cookies';
+    totalLI.textContent = `Total ${total} cookies`;
     cityUL.appendChild(totalLI);
     storesArticle.appendChild(cityUL);
     // 2 pieces of data: hourOfDay: ##cookies
@@ -59,3 +59,53 @@ var seattleStore = {
 
 };
 seattleStore.render();
+var myTable = document.getElementById('myTable');
+var coffeeArray = ['Latte', 'Mocha', 'Americano', 'Cappucino'];
+
+var coffeeTable = document.createElement('table');//creating the table
+var headerRow = document.createElement('tr');//creating the row within the table
+
+for(var i = 0; i < coffeeArray.length; i++){
+  var tableHeader = document.createElement('th');
+  tableHeader.textContent = coffeeArray[i]; //ask about this
+  headerRow.appendChild(tableHeader);
+}
+coffeeTable.appendChild(headerRow);
+
+for (var i = 0; i < 4; i++){
+  var row = document.createElement('tr');
+  // nested for loop begins
+  for(var j = 0; j < coffeeArray.length; j++){
+    var tableData = document.createElement('td');
+    tableData.textContent = Math.floor(getRandomInt(0, 100));
+    row.appendChild(tableData);
+  }
+  coffeeTable.appendChild(row);
+}
+
+myTable.appendChild(coffeeTable);
+
+seattleStore.render();
+
+function Coffee(size, type, price){
+  //set properties using this
+  this.size = size;
+  this.coffeeType = type;
+  this.potato = price;
+  this.temperature = 180;
+  this.ingredients = [];
+  this.generateHourSales = function(){
+    console.log('hello');
+  };
+}
+
+Coffee.prototype.render = function(){
+  //rendering logic goes here
+};
+//to Create an object using a constructor function
+//we INSTANTIATE the object using the construction function
+
+var anthonysLatte = new Coffee('Large', 'latte', 5 );
+
+console.log(anthonysLatte.size);
+anthonysLatte.render();
