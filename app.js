@@ -12,7 +12,7 @@ function LocationInfo(name, customerMin, customerMax, customerAverage) {
   this.dailyTotal = 0;
   this.hourlySales = [];
   //nested for loops pushing data into array for hourlysales
-  for (var i = 0; i < hours.length; i++){
+  for (var i = 0; i < parseInt(hours.length); i++){ //Need to get it to read as a number and not a string
     var cPH = getRandomInt(this.customerMin, this.customerMax);
     var totalCookiePH = Math.floor(cPH * this.customerAverage);
     this.hourlySales.push(totalCookiePH);
