@@ -3,11 +3,22 @@
 var everyLocation = [];
 
 //Single constructor function
-function LocationInfo(locations, hours, salesPerHour) {
-  this.locations = locations;
-  this.hours = hours;
-  this.salesPerHour = [];
-  
+function LocationInfo(name, customerMin, customerMax, customerAverage) {
+  this.name = name;
+  this.customerMin = customerMin;
+  this.customerMax = customerMax;
+  this.customerAverage = customerAverage;
+  this.dailyTotal = 0;
+  this.hourlySales = [];
+  for (var i = 0; i < hours.length; i++){
+    var cPH = getRandomInt(this.customerMin, this.customerMax);
+    var totalCookiePH = Math.floor(cPH * this.customerAverage);
+    this.hourlySales.push(totalCookiePH);
+  }
+  for (var i = 0; i < this.hourlySales.length; i++){
+    this.dailyTotal = this.hourlySales[i] + this.dailyTotal;
+  }
+
 }
 
 //Collaborated with Alex pena, amazing help to get started
