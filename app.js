@@ -3,6 +3,12 @@
 var everyLocation = [];
 
 //Single constructor function
+function LocationInfo(locations, hours, salesPerHour) {
+  this.locations = locations;
+  this.hours = hours;
+  this.salesPerHour = [];
+  
+}
 
 //Collaborated with Alex pena, amazing help to get started
 //Open hours
