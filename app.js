@@ -1,4 +1,5 @@
 'use strict';
+//Collaborated with Alex pena, amazing help to get started and work with to understand labs 6-7 and hopefully more
 // array for storage of values in contstructor function
 var everyLocation = [];
 
@@ -10,6 +11,7 @@ function LocationInfo(name, customerMin, customerMax, customerAverage) {
   this.customerAverage = customerAverage;
   this.dailyTotal = 0;
   this.hourlySales = [];
+  //nested for loops pushing data into array for hourlysales
   for (var i = 0; i < hours.length; i++){
     var cPH = getRandomInt(this.customerMin, this.customerMax);
     var totalCookiePH = Math.floor(cPH * this.customerAverage);
@@ -18,10 +20,21 @@ function LocationInfo(name, customerMin, customerMax, customerAverage) {
   for (var i = 0; i < this.hourlySales.length; i++){
     this.dailyTotal = this.hourlySales[i] + this.dailyTotal;
   }
+  for (var i = 0; i < hours.length; i++){
+
+  }
 
 }
 
-//Collaborated with Alex pena, amazing help to get started
+var seattleStore = new LocationInfo('Seattle', 23,65, 6.3);
+var tokyoStore = new LocationInfo('Tokyo', 3, 24, 1.2);
+var dubaiStore = new LocationInfo('Dubai', 11, 38, 3.7);
+var parisStore = new LocationInfo('Paris', 20,38,2.3);
+var limaStore = new LocationInfo('Lima', 2, 16, 4.6);
+
+everyLocation.push(seattleStore, tokyoStore, dubaiStore, parisStore, limaStore);
+
+
 //Open hours
 var hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
 //RNGESUS//
