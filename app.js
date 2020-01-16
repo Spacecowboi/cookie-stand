@@ -1,7 +1,7 @@
 'use strict';
 //Collaborated with Alex pena, amazing help to get started and work with to understand labs 6-7 and hopefully more
 
-debugger;
+
 // //RNGESUS//
 function getRandomInt(customerMin, customerMax) {
   var randomNumber = Math.random() * (customerMax - customerMin) + customerMin;
@@ -28,11 +28,13 @@ function LocationInfo(name, customerMin, customerMax, customerAverage) {
     this.hourlySales.push(totalCookiePH);
   }
   for (var i = 0; i < this.hourlySales.length; i++){
+    //debugger;
     this.dailyTotal = this.hourlySales[i] + this.dailyTotal;
+    console.log(this.dailyTotal);
   }
-  for (var i = 0; i < hours.length; i++){
+  //for (var i = 0; i < hours.length; i++){
 
-  }
+  //}
 
 }
 
@@ -48,24 +50,49 @@ console.log(everyLocation);
 
 //Table time ^_^ please god help me
 
-Location.prototype.renderHeader = function(){
+var tableHead = function(){ // creating table header 
   var trElement = document.createElement('tr');
   var thElement = document.createElement('th');
   thElement.textContent = 'Location';
   trElement.appendChild(thElement);
   salmonTable.appendChild(trElement);
 
-  for( var i = 0; i < hours.length; i++){
+  for( var i = 0; i < hours.length; i++){ // populating the table header
+    debugger;
+    var thEl = document.createElement('th');
+    thEl.textContent = hours[i];
+    trElement.appendChil(thEl);   // appending the table header
+  }
+};
+
+LocationInfo.prototype.render = function(){ 
+  var trElement = document.createElement('tr');
+  var thElement = document.createElement('th');
+  thElement.textContent = this.name;
+  trElement.appendChild(thElement);
+  salmonTable.appendChild(trElement);
+
+  for( var i = 0; i < hours.length; i++){ 
+    debugger;
     var thEl = document.createElement('th');
     thEl.textContent = hours[i];
     trElement.appendChil(thEl);
   }
-  var lastCell = document.createElement('th'); // Parent on left, child on right
-  lastCell.textContent = 'Store Total';
-  trElement.appendChild(lastCell);
+
 };
-renderHeader();
-console.log(renderHeader);
+
+
+
+var tableHead = function(){ // last cell of header 
+  var trElement = document.createElement('tr');
+  var thElement = document.createElement('th');
+  thElement.textContent = 'Daily Location Total'
+  trElement.appendChild(thElement);
+  salmonTable.appendChild(trElement);
+
+
+
+
 
 
 
