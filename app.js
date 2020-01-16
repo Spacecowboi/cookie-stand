@@ -2,15 +2,36 @@
 //Collaborated with Alex pena, amazing help to get started and work with to understand labs 6-7 and hopefully more
 
 
-// //RNGESUS//
+// //RNGESUS//--------------------------------------------------------------------------------------------------------
 function getRandomInt(customerMin, customerMax) {
   var randomNumber = Math.random() * (customerMax - customerMin) + customerMin;
   return Math.floor(randomNumber);
 }
-//Global Access Point
+//Global Access Point-------------------------------------------------------------------------------------------------
 var everyLocation = [];
 var hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
 var salmonTable = document.getElementById('myTable');
+
+//  TABLE HEADER //
+
+var trElement = document.createElement('tr');
+var thElement = document.createElement('th');
+thElement.textContent = 'Location';
+trElement.appendChild(thElement);
+
+//populating the table header
+
+for( var i = 0; i < hours.length; i++){
+  //debugger;
+  var thEl = document.createElement('th');
+  thEl.textContent = hours[i];
+  trElement.appendChild(thEl);   // appending the table header
+};
+
+var thTotal = document.createElement('th');
+thTotal.textContent = 'Totals';
+trElement.appendChild(thTotal);
+salmonTable.appendChild(trElement);
 
 
 //Single constructor function
@@ -21,21 +42,21 @@ function LocationInfo(name, customerMin, customerMax, customerAverage) {
   this.customerMin = customerMin;
   this.customerMax = customerMax;
   this.customerAverage = customerAverage;
-  //nested for loops pushing data into array for hourlysales
-  for (var i = 0; i < hours.length; i++){ //working now as intended
-    var cPH = getRandomInt(this.customerMin, this.customerMax);
-    var totalCookiePH = Math.floor(cPH * this.customerAverage);
-    this.hourlySales.push(totalCookiePH);
-  }
-  for (var i = 0; i < this.hourlySales.length; i++){
-    //debugger;
-    this.dailyTotal = this.hourlySales[i] + this.dailyTotal;
-    console.log(this.dailyTotal);
-  }
-  //for (var i = 0; i < hours.length; i++){
 
-  //}
-
+  // for loops pushing data into array for hourlysales
+  this.getHourlySales = function(){
+    for (var i = 0; i < hours.length; i++){ //working now as intended
+      var cPH = getRandomInt(this.customerMin, this.customerMax);
+      var totalCookiePH = Math.floor(cPH * this.customerAverage);
+      this.hourlySales.push(totalCookiePH);
+    };
+  };
+  this.getDailySum = function(){
+    for (var i = 0; i < this.hourlySales.length; i++){
+      this.dailyTotal = this.hourlySales[i] + this.dailyTotal;
+    //console.log(this.dailyTotal);
+    }
+  };
 }
 
 var seattleStore = new LocationInfo('Seattle', 23,65, 6.3);
@@ -45,57 +66,68 @@ var parisStore = new LocationInfo('Paris', 20,38,2.3);
 var limaStore = new LocationInfo('Lima', 2, 16, 4.6);
 
 everyLocation.push(seattleStore, tokyoStore, dubaiStore, parisStore, limaStore);
-console.log(seattleStore);
-console.log(everyLocation);
+//console.log(seattleStore);
+//console.log(everyLocation);
 
-//Table time ^_^ please god help me
 
-var tableHead = function(){ // creating table header 
-  var trElement = document.createElement('tr');
-  var thElement = document.createElement('th');
-  thElement.textContent = 'Location';
-  trElement.appendChild(thElement);
-  salmonTable.appendChild(trElement);
 
-  for( var i = 0; i < hours.length; i++){ // populating the table header
-    debugger;
-    var thEl = document.createElement('th');
-    thEl.textContent = hours[i];
-    trElement.appendChil(thEl);   // appending the table header
-  }
-};
 
-LocationInfo.prototype.render = function(){ 
-  var trElement = document.createElement('tr');
+//Render time
+
+LocationInfo.prototype.render = function(){               // creating store rows
+  this.getHourlySales();
+  this.getDailySum();
+  var createRow = document.createElement('tr');
+
+
   var thElement = document.createElement('th');
   thElement.textContent = this.name;
-  trElement.appendChild(thElement);
-  salmonTable.appendChild(trElement);
+  createRow.appendChild(thElement);
+  salmonTable.appendChild(createRow);
 
-  for( var i = 0; i < hours.length; i++){ 
-    debugger;
+  for( var i = 0; i < hours.length; i++){
+    //debugger; // debugger is best friend
     var thEl = document.createElement('th');
-    thEl.textContent = hours[i];
-    trElement.appendChil(thEl);
+    thEl.textContent = this.hourlySales[i];
+    createRow.appendChild(thEl);
+
   }
 
+  var dailySumTotal = document.createElement('td');
+  dailySumTotal.textContent = this.dailyTotal;
+  createRow.appendChild(dailySumTotal);
 };
 
+// FOOTSIES
+function lastTotal(){
 
+  var footerRow = document.createElement('tr'); //Append everything to mama <<<<<<
 
-var tableHead = function(){ // last cell of header 
-  var trElement = document.createElement('tr');
-  var thElement = document.createElement('th');
-  thElement.textContent = 'Daily Location Total'
-  trElement.appendChild(thElement);
-  salmonTable.appendChild(trElement);
-
-
-
+  var footerBox = document.createElement('th');
+  footerBox.textContent = 'Total';
+  footerRow.appendChild(footerBox);
 
 
 
 
+
+
+
+
+
+
+
+  salmonTable.appendChild(footerRow);
+}
+// CALLING ALL LOCATIONS
+
+function lastRender(){
+  for(var i = 0; i < everyLocation.length; i++)
+    everyLocation[i].render();
+
+}
+lastRender();
+lastTotal();
 
 
 
