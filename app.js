@@ -1,5 +1,6 @@
 'use strict';
 //Collaborated with Alex pena, amazing help to get started and work with to understand labs 6-7 and hopefully more
+// Collaborated with Teddy for the render and footer
 
 
 // //RNGESUS//--------------------------------------------------------------------------------------------------------
@@ -107,18 +108,28 @@ function lastTotal(){
   footerBox.textContent = 'Total';
   footerRow.appendChild(footerBox);
 
+  var columnTotal = 0;
+  var finalTotal = 0;
 
+  for( var i = 0; i < hours.length; i++){
+    columnTotal = 0;
 
+    for(var k = 0; k < everyLocation.length; k++){
+      columnTotal = columnTotal + everyLocation[k].hourlySales[i];
+      finalTotal = finalTotal + everyLocation[k].hourlySales[i];
+    }
 
-
-
-
-
-
-
+    var finalLoop = document.createElement('td');
+    finalLoop.textContent = columnTotal;
+    footerRow.appendChild(finalLoop);
+  }
+  var finalTotalCell = document.createElement('td');
+  finalTotalCell.textContent = finalTotal;
+  footerRow.appendChild(finalTotalCell);
 
   salmonTable.appendChild(footerRow);
 }
+
 // CALLING ALL LOCATIONS
 
 function lastRender(){
