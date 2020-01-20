@@ -140,6 +140,12 @@ function lastRender(){
 lastRender();
 lastTotal();
 
+// Building an event form handler
+
+var form = document.getElementById('NewStore');
+form.addEventListener('submit', subWork);
+
+function subWork(event)
 
 
 
