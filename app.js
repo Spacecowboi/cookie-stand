@@ -155,6 +155,7 @@ function subWork(event){
   var newCookie = new LocationInfo(name, minCust, maxCust, avgSale);
   console.log(newCookie);
   everyLocation.push(subWork);
+  //add separate render maybe?
 
 }
 
