@@ -140,12 +140,23 @@ function lastRender(){
 lastRender();
 lastTotal();
 
-// Building an event form handler
+//Building an event form handler
 
 var form = document.getElementById('NewStore');
 form.addEventListener('submit', subWork);
 
-function subWork(event)
+function subWork(event){
+  event.preventDefault();
+  var name = event.name.value;
+  var minCust = parseInt(event.target.minCustomers.value);
+  var maxCust = parseInt(event.target.maxCustomers.value);
+  var avgSale = parseInt(event.target.avgSales.value);
+
+  var newCookie = new LocationInfo(name, minCust, maxCust, avgSale);
+  console.log(newCookie);
+  everyLocation.push(subWork);
+
+}
 
 
 
